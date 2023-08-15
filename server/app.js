@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
-const mongoStr =  'mongodb+srv://marco3072003:inpgKF1X1IVHvlNT@cluster0.oz92vag.mongodb.net/videos';
+const mongoStr =  process.env.DATABASE_URL;
 // const jwt = require('jsonwebtoken')
 const cors = require('cors');
 
