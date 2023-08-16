@@ -1,5 +1,5 @@
 <div align="center">
-  ###FINAL PROJECT GENERASI GIGIH 3.0
+  <b>FINAL PROJECT GENERASI GIGIH 3.0</b>
 </div>
 
 # Tokopedia Play Clone
