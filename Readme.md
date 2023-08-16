@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="path/to/your/logo.png" alt="Project Logo" width="200">
+  FINAL PROJECT GENERASI GIGIH 3.0
 </div>
 
 # Tokopedia Play Clone
