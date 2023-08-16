@@ -10,6 +10,9 @@ module.exports = {
       },
       colors: {
         'color-template': '#28282F'
+      },
+      height:{
+        '90.72%': '90.72%'
       }
       
     },

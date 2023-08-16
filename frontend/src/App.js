@@ -14,7 +14,7 @@ function App() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     setIsLogOutModal(false); 
-    window.location.reload();
+    window.location.href = 'http://localhost:3000/'
   }
   return (
   <Router>

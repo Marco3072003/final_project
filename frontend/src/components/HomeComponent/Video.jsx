@@ -1,5 +1,5 @@
-export default function Video({isLoggedIn, handleOpenModal, handleOpenVideo,videoId,imgUrl, title, views}){
-    const handleClick = isLoggedIn ? ()=>handleOpenVideo(videoId) : handleOpenModal; 
+export default function Video({isLoggedIn, handleOpenVideo, handleOpenModal, videoId,imgUrl, title, views}){
+    const handleClick = isLoggedIn ? () => handleOpenVideo(videoId) : handleOpenModal; 
     return(
         <div onClick={handleClick} className="video bg-custom-gradient border border-solid border-gray-800 shadow-md shadow-gray-900 rounded-xl  cursor-pointer">
            

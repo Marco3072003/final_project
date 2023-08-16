@@ -10,8 +10,8 @@ const utility = require('../utility/autenticateToken');
 router.get('/', async(req,res) => {
     try{
         const video = await Video.findAllVideos();
-
         res.status(200).json({Videos: video})
+        
     }catch(e){
         res.status(500).json({error: e.message});
     }

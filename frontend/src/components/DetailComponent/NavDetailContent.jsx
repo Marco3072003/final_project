@@ -1,4 +1,4 @@
-import Button from "./Button"
+import Button from "../GeneralComponent/Button"
 import { Link } from 'react-router-dom';
 
 export default function NavDetailContent({handleLogOutModal,username}){
