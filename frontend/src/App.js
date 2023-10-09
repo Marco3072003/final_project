@@ -14,7 +14,7 @@ function App() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     setIsLogOutModal(false); 
-    window.location.href = 'http://localhost:3000/'
+    window.location.href = 'https://front-end-final-project-gg30.vercel.app/'
   }
   return (
   <Router>

@@ -1,6 +1,6 @@
 export default function Product({title, price, imgUrl}){
     return(
-        <div className="relative bg-gray-500 w-full h-full rounded-md cursor-pointer flex just">
+        <div className="relative bg-gray-500 w-full h-full rounded-md cursor-pointer flex border border-gray-600 border-spacing-6">
             <img className="w-full h-full rounded-md" src={imgUrl} alt="product" />
             <div className='thumbnail-product absolute w-full h-full z-10 inset-0 rounded-md'></div>
             <h3 className="absolute inset-0 top-20 left-3 mt-1 text-white z-20 text-sm font-medium shadow-lg">{title}</h3>

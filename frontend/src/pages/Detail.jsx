@@ -85,6 +85,8 @@ export default function Detail({handleLogOutModal, handleLogOut,isLogOutModal}){
         alert('Comment is Empty')
     }
 
+    setCommentText('');
+
     }
 
     function handleChangeComment(event){
@@ -92,6 +94,8 @@ export default function Detail({handleLogOutModal, handleLogOut,isLogOutModal}){
         setCommentText(newCommentText);
        
     }
+
+    
 
     return(
         <>

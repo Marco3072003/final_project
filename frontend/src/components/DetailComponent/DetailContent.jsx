@@ -10,11 +10,44 @@ export default function DetailContent({handleCommentSubmit, handleChangeComment,
     }
     
     return(
-        <div className="detail-content flex h-full">
-            {/* product section */} 
-            <div className="bg-transparent w-1/4 mt-14 ">
+        <div className="detail-content">
+            <div className="bg-transparent flex flex-col">
+            <div className="bg-transparent flex " style={{height: '650px'}}>
+           
+                {/* video section */}
+                <DetailVideo />
+
+                {/* comments section */}
+                <div className="bg-color-template h-full" style={{width: '25%'}}>
+                        <div className="comments-section-wrapper flex flex-col h-90.72% mt-16 ">
+                            {/* comments-wrapper */}
+                            
+                            <div className="comment-wrapper  h-5/6 flex flex-col px-2 overflow-auto" >
+                                                
+                                {   
+                                    
+                                    (!CommentList) ? (<h1 className="text-white">LOADING COMMENTS....</h1>)
+                                        : CommentList.map((comment,index)=>{
+                                            return(<CommentItem key={index} username={comment.username} text={comment.comment}/>)
+                                        
+                                        })
+                                }    
+                                
+
+                            </div>
+                            {/* input comment */}
+                            <InputWrapper handleCommentSubmit={handleCommentSubmit} commentText={commentText} handleChangeComment={handleChangeComment}/>
+                        </div>
+                    
+                </div> 
+            </div>
+
+             {/* product section */} 
+            <div className="bg-transparent flex-1 ">
                 
-                    <div className="bg-transparent ml-11 flex flex-col w-full h-full gap-6 justify-center">
+                    <div className="bg-gray-600 ml-0 flex flex-row w-full h-full justify-around">
+                        
+
                         
                         
                         {loadingProduct ? (
@@ -23,7 +56,7 @@ export default function DetailContent({handleCommentSubmit, handleChangeComment,
                                     ) : 
                                     
                                      ProductList.map((product,index)=>{
-                                        return(<Link to={product.productURL} className="h-32 w-60">
+                                        return(<Link to={product.productURL} className="h-32 w-60 flex">
                                         <Product key={index} title={product.title} price='Rp.500.000' imgUrl={product.imgURL} onClick={handleRedirectProduct} /> 
                                         </Link>)
                                     }) 
@@ -34,31 +67,12 @@ export default function DetailContent({handleCommentSubmit, handleChangeComment,
                 
             </div> 
             
-            {/* video section */}
-            <DetailVideo />
-            {/* comments section */}
-            <div className="bg-color-template w-1/4 h-screen" >
-                    <div className="comments-section-wrapper flex flex-col w-full h-90.72% mt-16 ">
-                        {/* comments-wrapper */}
-                        
-                        <div className="comment-wrapper h-5/6 w-full flex flex-col px-2 overflow-auto">
-                                            
-                            {   
-                                
-                                (!CommentList) ? (<h1 className="text-white">LOADING COMMENTS....</h1>)
-                                    : CommentList.map((comment,index)=>{
-                                        return(<CommentItem key={index} username={comment.username} text={comment.comment}/>)
-                                    
-                                    })
-                            }    
-                            
+            
 
-                        </div>
-                        {/* input comment */}
-                        <InputWrapper handleCommentSubmit={handleCommentSubmit} commentText={commentText} handleChangeComment={handleChangeComment}/>
-                    </div>
-                
-            </div> 
+            </div>
+
+            
+            
         </div>
     )
 }
