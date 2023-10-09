@@ -10,16 +10,16 @@ export default function DetailContent({handleCommentSubmit, handleChangeComment,
     }
     
     return(
-        <div className="detail-content">
-            <div className="bg-transparent flex flex-col">
-            <div className="bg-transparent flex " style={{height: '650px'}}>
+            
+            <div className="bg-transparent flex flex-col box-border h-screen" style={{paddingTop: '5rem'}} >
+            <div className="bg-transparent flex h-3/4">
            
                 {/* video section */}
                 <DetailVideo />
 
                 {/* comments section */}
-                <div className="bg-color-template h-full" style={{width: '25%'}}>
-                        <div className="comments-section-wrapper flex flex-col h-90.72% mt-16 ">
+                <div className="bg-color-template h-full " style={{width: '25%'}}>
+                        <div className="comments-section-wrapper flex flex-col h-full ">
                             {/* comments-wrapper */}
                             
                             <div className="comment-wrapper  h-5/6 flex flex-col px-2 overflow-auto" >
@@ -43,11 +43,10 @@ export default function DetailContent({handleCommentSubmit, handleChangeComment,
             </div>
 
              {/* product section */} 
-            <div className="bg-transparent flex-1 ">
+           
                 
-                    <div className="bg-gray-600 ml-0 flex flex-row w-full h-full justify-around">
-                        
-
+                    <div className="bg-gray-600 m-0 flex w-full justify-around flex-1 h-1/4" style={{alignItems:'center'}}>
+        
                         
                         
                         {loadingProduct ? (
@@ -56,7 +55,7 @@ export default function DetailContent({handleCommentSubmit, handleChangeComment,
                                     ) : 
                                     
                                      ProductList.map((product,index)=>{
-                                        return(<Link to={product.productURL} className="h-32 w-60 flex">
+                                        return(<Link to={product.productURL} className="flex" style={{width:'19%', height: '80%'}}>
                                         <Product key={index} title={product.title} price='Rp.500.000' imgUrl={product.imgURL} onClick={handleRedirectProduct} /> 
                                         </Link>)
                                     }) 
@@ -64,15 +63,17 @@ export default function DetailContent({handleCommentSubmit, handleChangeComment,
                             }
 
                     </div>
-                
-            </div> 
-            
-            
 
             </div>
+                
+         
+            
+            
+
+          
 
             
             
-        </div>
+        
     )
 }

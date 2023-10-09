@@ -101,7 +101,7 @@ export default function Detail({handleLogOutModal, handleLogOut,isLogOutModal}){
         <>
 
         {isLogOutModal && <LogOutModal handleLogOutModal={handleLogOutModal} handleLogOut={handleLogOut}/>}
-        <nav className=" flex fixed top-0 bg-custom-gradient px-8 w-full h-14 items-center justify-between z-40">
+        <nav className="flex fixed top-0 bg-custom-gradient px-8 w-full h-20 items-center justify-between z-40">
         <NavDetailContent handleLogOutModal={handleLogOutModal} username={username} />
         </nav>
         <DetailContent handleChangeComment={handleChangeComment} handleCommentSubmit={handleCommentSubmit}
