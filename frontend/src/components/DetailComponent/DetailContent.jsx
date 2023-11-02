@@ -27,8 +27,8 @@ export default function DetailContent({handleCommentSubmit, handleChangeComment,
                                 {   
                                     
                                     (!CommentList) ? (<h1 className="text-white">LOADING COMMENTS....</h1>)
-                                        : CommentList.map((comment,index)=>{
-                                            return(<CommentItem key={index} username={comment.username} text={comment.comment}/>)
+                                        : CommentList.map(comment=>{
+                                            return(<CommentItem key={comment.timestamp} username={comment.username} text={comment.comment}/>)
                                         
                                         })
                                 }    
@@ -55,8 +55,8 @@ export default function DetailContent({handleCommentSubmit, handleChangeComment,
                                     ) : 
                                     
                                      ProductList.map((product,index)=>{
-                                        return(<Link to={product.productURL} className="flex" style={{width:'19%', height: '80%'}}>
-                                        <Product key={index} title={product.title} price='Rp.500.000' imgUrl={product.imgURL} onClick={handleRedirectProduct} /> 
+                                        return(<Link to={product.productURL} className="flex" style={{width:'19%', height: '80%'}} key={product.id}>
+                                                <Product key={product.id} title={product.title} price='Rp.500.000' imgUrl={product.imgURL} onClick={handleRedirectProduct} /> 
                                         </Link>)
                                     }) 
 

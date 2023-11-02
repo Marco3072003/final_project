@@ -4,16 +4,17 @@ import LogOutModal from "../components/HomeComponent/LogOutModal";
 import { useState, useEffect } from 'react' 
 import {useParams} from 'react-router-dom'
 
-export default function Detail({handleLogOutModal, handleLogOut,isLogOutModal}){
+export default function Detail(){
     const [commentText, setCommentText] = useState('');
-    const [errors, setErrors] = useState({});
     const username = localStorage.getItem('username');
     const token = localStorage.getItem('token');
+    const [errors, setErrors] = useState({})
     const videoId = useParams().id;
     const [comments, setComments] = useState({});
     const [products, setProducts] = useState({})
     const [loading, setLoading] = useState(true);
     const [loadingProduct, setLoadingProduct] = useState(true);
+    const [isLogOutModal, setIsLogOutModal] = useState(false);
     
 
     useEffect(()=>{
@@ -26,6 +27,8 @@ export default function Detail({handleLogOutModal, handleLogOut,isLogOutModal}){
         getAllProducts();
 
     },[])
+
+    
 
     //Function API Handle
     async function getAllProducts(){
@@ -65,7 +68,15 @@ export default function Detail({handleLogOutModal, handleLogOut,isLogOutModal}){
         
     }
 
-   
+    function handleLogOutModal(){
+        isLogOutModal ? setIsLogOutModal(false) : setIsLogOutModal(true)
+    }
+
+    function handleLogOut(){
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        setIsLogOutModal(false); 
+    }
 
     //Function Handle Componen
     function validateComment() {

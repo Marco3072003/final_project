@@ -5,12 +5,15 @@ import RegisterModal from '../components/HomeComponent/RegisterModal'
 import SuccessModal from '../components/HomeComponent/SuccessModal';
 import LogOutModal from '../components/HomeComponent/LogOutModal';
 import NavHomeContent from '../components/HomeComponent/NavHomeContent';
+import SuccessRegisterContentModal from '../components/HomeComponent/SuccessRegisterContentModal';
+import SuccessLoginContentModal from '../components/HomeComponent/SuccessLoginContentModal';
 import { useEffect, useState } from 'react';
 
-export default function Home({handleLogOut,handleLogOutModal, isLogOutModal}){
+export default function Home(){
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isOpenRegisterModal, setIsOpenRegisterModal] = useState(false);
   const [isOpenSuccessRegisterModal, setIsOpenSuccessRegisterModal] = useState(false)
+  const [isOpenSuccessLoginModal, setIsOpenSuccessLoginModal] = useState(false)
   const [isLoggedIn , setIsLoggedIn] = useState(false);
   const [form, setForm] = useState({'username':'', 'password':''});
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -18,6 +21,9 @@ export default function Home({handleLogOut,handleLogOutModal, isLogOutModal}){
   const [videos, setVideos] = useState({});
   const [loading, setLoading] = useState(true);
   const [isHomeContent, setIsHomeContent] = useState(true);
+  const [isLogOut, setIsLogOut] = useState(false);
+  const [isLogOutModal, setIsLogOutModal] = useState(false);
+  
   
 
   useEffect(() => {
@@ -59,9 +65,19 @@ export default function Home({handleLogOut,handleLogOutModal, isLogOutModal}){
       },
     });
     const data = await response.json();
-    localStorage.setItem('token', data.accessToken);
-    localStorage.setItem('username', data.username);
-    window.location.reload()
+    if(data.accessToken || data.username){
+        localStorage.setItem('token', data.accessToken);
+        localStorage.setItem('username', data.username);
+        const newToken = localStorage.getItem('token');
+        const username = localStorage.getItem('username');
+        setToken(newToken);
+        setUsername(username);
+        setIsOpenModal(false)
+        setIsOpenSuccessLoginModal(true);
+    }else{
+        alert(data.error);
+    }
+
   }
 
   async function getAllVideos(){
@@ -82,6 +98,17 @@ export default function Home({handleLogOut,handleLogOutModal, isLogOutModal}){
     return await response.json();
   }
 
+  function handleLogOutModal(){
+    isLogOutModal ? setIsLogOutModal(false) : setIsLogOutModal(true)
+   }
+
+   function handleLogOut(){
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    setIsLogOutModal(false); 
+    setIsLoggedIn(false);
+  }
+
   //Function Handle Content or Component
   function handleContent(videosPar){
     const videosArray = videosPar.Videos;
@@ -95,6 +122,12 @@ export default function Home({handleLogOut,handleLogOutModal, isLogOutModal}){
     setIsOpenRegisterModal(false);
     setIsOpenModal(false)
     isOpenSuccessRegisterModal ? setIsOpenSuccessRegisterModal(false) : setIsOpenSuccessRegisterModal(true);
+  }
+
+  function handleOpenSuccessLoginModal(){
+    setIsOpenModal(false);
+    setIsOpenRegisterModal(false)
+    isOpenSuccessLoginModal ? setIsOpenSuccessLoginModal(false) : setIsOpenSuccessLoginModal(true);
   }
 
   function handleContentChanges(status){
@@ -147,26 +180,41 @@ export default function Home({handleLogOut,handleLogOutModal, isLogOutModal}){
     }else{
       alert('Input Cannot Be Empty')
     }
-  
   }
 
   
 
   async function handleOpenVideo(videoId){
-    const response = await plusViewVideo(videoId)
-    window.location.href = `https://front-end-final-project-gg30.vercel.app/detail/${videoId}`; 
+    const response = await plusViewVideo(videoId);
+    console.log(response)
   }
 
   return (
   <>
-    {isLoggedIn ? <Navbar  content ={<NavHomeContent onClick={handleLogOutModal}  isLoggedIn={isLoggedIn} username={username} handleContentChanges={handleContentChanges} />}/> : <Navbar  content ={<NavHomeContent onClick={handleOpenModal} isLoggedIn = {isLoggedIn} handleContentChanges={handleContentChanges} />}/>}
+
+    <Navbar>
+      {isLoggedIn ? 
+        <NavHomeContent onClick={handleLogOutModal}  isLoggedIn={isLoggedIn} username={username} handleContentChanges={handleContentChanges} />  :
+        <NavHomeContent onClick={handleOpenModal} isLoggedIn = {isLoggedIn} handleContentChanges={handleContentChanges} />
+      }
+    </Navbar>
+      
+
+    {/* {isLoggedIn ? <Navbar  content ={<NavHomeContent onClick={handleLogOutModal}  isLoggedIn={isLoggedIn} username={username} handleContentChanges={handleContentChanges} />}/> : <Navbar  content ={<NavHomeContent onClick={handleOpenModal} isLoggedIn = {isLoggedIn} handleContentChanges={handleContentChanges} />}/>} */}
 
     <HomeContent handleOpenVideo={handleOpenVideo} handleOpenModal={handleOpenModal} isLoggedIn ={isLoggedIn} videos={videos} loading={loading} />
     
     {isLogOutModal && <LogOutModal handleLogOutModal={handleLogOutModal} handleLogOut={handleLogOut}/>}
     {isOpenModal && <LoginModal handleOpenModal={handleOpenModal} handleSubmit={handleSubmit} handleChange={handleChange} handleOpenRegisterModal={handleOpenRegisterModal} />} 
     {isOpenRegisterModal && <RegisterModal handleRegister={handleRegister} handleChange ={handleChange} handleOpenRegisterModal={handleOpenRegisterModal} />}
-    {isOpenSuccessRegisterModal && <SuccessModal handleOpenSuccessRegisterModal={handleOpenSuccessRegisterModal} handleOpenModal={handleOpenModal}/>}
+    {isOpenSuccessRegisterModal && <SuccessModal>
+                                      <SuccessRegisterContentModal handleOpenSuccessRegisterModal={handleOpenSuccessRegisterModal} handleOpenModal={handleOpenModal}/>
+                                   </SuccessModal>}
+                                   
+   {isOpenSuccessLoginModal && <SuccessModal>
+                                    <SuccessLoginContentModal handleOpenSuccessLoginModal={handleOpenSuccessLoginModal} username={username}/>
+                               </SuccessModal>
+     } 
   </>
 
   );

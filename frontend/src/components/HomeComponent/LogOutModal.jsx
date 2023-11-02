@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export default function LogOutModal({handleLogOutModal, handleLogOut}){
     return(
 
@@ -7,7 +9,9 @@ export default function LogOutModal({handleLogOutModal, handleLogOut}){
             <div className="flex flex-col h-36 w-40  items-center justify-evenly">
                 <h2 className="text-2xl font-bold text-green-900">Logout?</h2>
                 <div className="flex justify-between w-full gap-2">
-                    <button onClick={handleLogOut} className="px-6 py-2 bg-green-600 text-white rounded-md">Yes</button>
+                    <Link to='/' onClick={handleLogOut}>
+                        <button className="px-6 py-2 bg-green-600 text-white rounded-md">Yes</button>
+                    </Link>
                     <button onClick={handleLogOutModal} className="px-6 py-2 bg-red-600 text-white rounded-md">No</button>
                 </div>
             </div>

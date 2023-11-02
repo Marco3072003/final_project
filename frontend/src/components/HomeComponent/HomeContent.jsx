@@ -14,11 +14,13 @@ export default function ({isLoggedIn, handleOpenModal, handleOpenVideo, videos, 
                     <p></p>
                 ) : 
                     Videos.map((video)=>{  
-                       return ( <Video key={video.videoId} handleOpenVideo={handleOpenVideo} 
-                        handleOpenModal={handleOpenModal} isLoggedIn={isLoggedIn} 
-                        videoId={video.videoId} imgUrl={video.imgURL} title={video.title} 
-                        views={video.views}/>)
-                        })
+                                return  ( <Video key={video.videoId} handleOpenVideo={handleOpenVideo} 
+                                        handleOpenModal={handleOpenModal} isLoggedIn={isLoggedIn} 
+                                        videoId={video.videoId} imgUrl={video.imgURL} title={video.title} 
+                                        views={video.views} />)
+                                        
+                                        
+                                        })
                     
                     
                 
