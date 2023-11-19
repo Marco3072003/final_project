@@ -64,6 +64,7 @@ export default function Home(){
         'Content-Type': 'application/json', 
       },
     });
+    
     const data = await response.json();
     if(data.accessToken || data.username){
         localStorage.setItem('token', data.accessToken);
